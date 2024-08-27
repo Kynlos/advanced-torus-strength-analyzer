@@ -7,6 +7,7 @@ from scipy.interpolate import interp1d
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D
 import real_world_examples
+import advanced_calculations
 
 # Constants
 G = 9.81  # Gravitational acceleration (m/s^2)
@@ -159,7 +160,14 @@ def custom_analysis(stdscr):
         ("Temperature change (T)", 50),
         ("Number of cycles (N_cycles)", 1e6),
         ("Ultimate tensile strength (S_ut)", 500e6),
-        ("Failure criteria (von Mises)", 250e6)
+        ("Failure criteria (von Mises)", 250e6),
+        ("Yield stress", 250e6),
+        ("Strain hardening exponent (n)", 0.2),
+        ("Inner temperature (T_inner)", 100),
+        ("Outer temperature (T_outer)", 25),
+        ("Density (rho)", 7800),
+        ("Angular velocity (omega)", 10),
+        ("Fracture toughness (K_IC)", 50e6)
     ]
     
     current_var = 0
@@ -206,6 +214,20 @@ def custom_analysis(stdscr):
             stdscr.refresh()
             curses.endwin()
             create_advanced_animation(variables[:-1], failure_criteria)
+            
+            # Perform advanced analysis
+            R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, N_cycles, S_ut, _, yield_stress, n, T_inner, T_outer, rho, omega, K_IC = [v[1] for v in variables]
+            advanced_results = advanced_calculations.advanced_torus_analysis(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, yield_stress, n, T_inner, T_outer, rho, omega, K_IC)
+            
+            # Display advanced results
+            print("\nAdvanced Analysis Results:")
+            print(f"Non-linear stress: {advanced_results['non_linear_stress']:.2e} Pa")
+            print(f"Thermal stress (hoop): {advanced_results['thermal_stress_hoop']:.2e} Pa")
+            print(f"Thermal stress (radial): {advanced_results['thermal_stress_radial']:.2e} Pa")
+            print(f"Centrifugal stress: {advanced_results['centrifugal_stress']:.2e} Pa")
+            print(f"Critical crack length: {advanced_results['critical_crack_length']:.2e} m")
+            
+            input("\nPress Enter to continue...")
             stdscr = curses.initscr()
 
 def main(stdscr):
