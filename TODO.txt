@@ -1,4 +1,4 @@
-Add more advanced material models, such as viscoelasticity or plasticity, to capture complex material behavior under various loading conditions.
+DONE :: Add more advanced material models, such as viscoelasticity or plasticity, to capture complex material behavior under various loading conditions.
 
 Implement a full 3D finite element analysis module for more accurate stress and strain predictions, including mesh generation and solver algorithms.
 
