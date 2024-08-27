@@ -43,7 +43,6 @@ def finite_element_analysis(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_
     
     return U.reshape((n_elements, n_elements, 3))
 
-
 def non_linear_material_model(strain, E, yield_stress, n, C, gamma):
     """Advanced non-linear material model combining Ramberg-Osgood and Chaboche models"""
     if strain <= yield_stress / E:
@@ -222,30 +221,44 @@ def advanced_torus_analysis(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_
         'optimized_weight': opt_weight
     }
 
-def calculate_torus_stresses(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, theta, phi):
-    # Membrane forces
-    N_phi = (p_int - p_ext) * r / 2
-    N_theta = (p_int - p_ext) * r * (2 + (r/R) * np.cos(theta)) / (2 + (r/R) * np.cos(theta))
+def run_analysis(calculate_torus_stresses, fatigue_analysis, advanced_calculations, create_advanced_animation):
+    print("Advanced Calculations Analysis")
     
-    # Bending moments
-    M_phi = E * t**3 / (12 * (1 - nu**2)) * (1/r + np.cos(theta)/R)
-    M_theta = nu * M_phi
-    
-    # Stresses due to external forces and moments
-    sigma_x = F_x / (2*np.pi*r*t) + (M_y * np.cos(phi) + M_z * np.sin(phi)) * r / (np.pi * r**3 * t)
-    sigma_y = F_y / (2*np.pi*r*t) + (M_z * np.cos(phi) - M_y * np.sin(phi)) * r / (np.pi * r**3 * t)
-    sigma_z = F_z / (2*np.pi*r*t)
-    tau_xy = M_x * r / (2 * np.pi * r**3 * t)
-    
-    # Thermal stress
-    alpha = 12e-6  # Thermal expansion coefficient
-    sigma_thermal = -E * alpha * T / (1 - nu)
-    
-    # Combine stresses
-    sigma_phi = N_phi / t + 6 * M_phi / t**2 + sigma_thermal + sigma_x
-    sigma_theta = N_theta / t + 6 * M_theta / t**2 + sigma_thermal + sigma_y
-    
-    # Calculate von Mises stress
-    sigma_vm = np.sqrt(sigma_phi**2 + sigma_theta**2 - sigma_phi*sigma_theta + 3*tau_xy**2)
-    
-    return sigma_vm, sigma_phi, sigma_theta
+    # Get user input for parameters
+    R = float(input("Enter major radius (R): "))
+    r = float(input("Enter minor radius (r): "))
+    t = float(input("Enter thickness (t): "))
+    E = float(input("Enter Young's modulus (E): "))
+    nu = float(input("Enter Poisson's ratio (nu): "))
+    p_int = float(input("Enter internal pressure (p_int): "))
+    p_ext = float(input("Enter external pressure (p_ext): "))
+    F_x = float(input("Enter Force X (F_x): "))
+    F_y = float(input("Enter Force Y (F_y): "))
+    F_z = float(input("Enter Force Z (F_z): "))
+    M_x = float(input("Enter Moment X (M_x): "))
+    M_y = float(input("Enter Moment Y (M_y): "))
+    M_z = float(input("Enter Moment Z (M_z): "))
+    T = float(input("Enter temperature change (T): "))
+    yield_stress = float(input("Enter yield stress: "))
+    n = float(input("Enter strain hardening exponent (n): "))
+    T_inner = float(input("Enter inner temperature (T_inner): "))
+    T_outer = float(input("Enter outer temperature (T_outer): "))
+    rho = float(input("Enter density (rho): "))
+    omega = float(input("Enter angular velocity (omega): "))
+    K_IC = float(input("Enter fracture toughness (K_IC): "))
+
+    # Perform advanced analysis
+    results = advanced_torus_analysis(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, yield_stress, n, T_inner, T_outer, rho, omega, K_IC)
+
+    # Display results
+    print("\nAdvanced Analysis Results:")
+    for key, value in results.items():
+        print(f"{key}: {value}")
+
+    input("\nPress Enter to return to the main menu...")
+
+if __name__ == "__main__":
+    # This allows the module to be run standalone for testing
+    from main import calculate_torus_stresses, fatigue_analysis
+    from visualization import create_advanced_animation
+    run_analysis(calculate_torus_stresses, fatigue_analysis, None, create_advanced_animation)

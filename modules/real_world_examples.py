@@ -110,17 +110,20 @@ examples = [
     }
 ]
 
-def visualize_example(example_index):
-    if 0 <= example_index < len(examples):
-        create_example_visualization(examples[example_index])
-    else:
-        print("Invalid example index")
-
-def list_examples():
+def run_analysis(calculate_torus_stresses, fatigue_analysis, advanced_calculations, create_advanced_animation):
+    print("Real World Examples")
     for i, example in enumerate(examples):
         print(f"{i + 1}. {example['name']}")
+    
+    choice = int(input("Enter the number of the example you want to visualize: ")) - 1
+    
+    if 0 <= choice < len(examples):
+        create_example_visualization(examples[choice])
+    else:
+        print("Invalid example index")
+    
+    input("\nPress Enter to return to the main menu...")
 
 if __name__ == "__main__":
-    list_examples()
-    choice = int(input("Enter the number of the example you want to visualize: ")) - 1
-    visualize_example(choice)
+    # This allows the module to be run standalone for testing
+    run_analysis(None, None, None, None)
