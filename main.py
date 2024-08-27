@@ -74,7 +74,7 @@ def fatigue_analysis(sigma_max, sigma_min, N_cycles, S_ut):
     return damage
 
 def create_advanced_animation(variables, failure_criteria):
-    R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, N_cycles, S_ut = [v[1] for v in variables]
+    R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, N_cycles, S_ut, yield_stress, n, T_inner, T_outer, rho, omega, K_IC = [v[1] for v in variables]
     
     theta = np.linspace(0, 2*np.pi, 100)
     phi = np.linspace(0, 2*np.pi, 100)
@@ -160,7 +160,6 @@ def custom_analysis(stdscr):
         ("Temperature change (T)", 50),
         ("Number of cycles (N_cycles)", 1e6),
         ("Ultimate tensile strength (S_ut)", 500e6),
-        ("Failure criteria (von Mises)", 250e6),
         ("Yield stress", 250e6),
         ("Strain hardening exponent (n)", 0.2),
         ("Inner temperature (T_inner)", 100),
@@ -208,15 +207,15 @@ def custom_analysis(stdscr):
                 stdscr.addstr(height-2, 0, "Invalid input. Press any key to continue.")
                 stdscr.getch()
         elif key == ord('c'):
-            failure_criteria = variables[-1][1]
+            failure_criteria = variables[16][1]  # Use yield stress as failure criteria
             stdscr.clear()
             stdscr.addstr(0, 0, "Calculating and visualizing. Please wait...")
             stdscr.refresh()
             curses.endwin()
-            create_advanced_animation(variables[:-1], failure_criteria)
+            create_advanced_animation(variables, failure_criteria)
             
             # Perform advanced analysis
-            R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, N_cycles, S_ut, _, yield_stress, n, T_inner, T_outer, rho, omega, K_IC = [v[1] for v in variables]
+            R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, N_cycles, S_ut, yield_stress, n, T_inner, T_outer, rho, omega, K_IC = [v[1] for v in variables]
             advanced_results = advanced_calculations.advanced_torus_analysis(R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T, yield_stress, n, T_inner, T_outer, rho, omega, K_IC)
             
             # Display advanced results
