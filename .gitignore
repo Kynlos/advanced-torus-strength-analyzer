@@ -29,3 +29,9 @@ push.py
 # Temporary files
 *.tmp
 *.bak
+
+# README generation script
+generate_readme.py
+
+# DOCS Generation
+generate_docs.py
