@@ -107,6 +107,86 @@ examples = [
     {
         "name": "Pneumatic Tire",
         "params": (0.3, 0.1, 0.01, 0.01e9, 0.45, 2.5e5, 1e5, 5e3, 0, 5e3, 100, 100, 100, 30)
+    },
+        {
+        "name": "Nuclear Reactor Containment",
+        "params": (10.0, 3.0, 0.5, 200e9, 0.3, 5e6, 1e5, 0, 0, -9.81e6, 1e7, 1e7, 1e7, 300)
+    },
+    {
+        "name": "Particle Accelerator Ring",
+        "params": (50.0, 0.5, 0.05, 200e9, 0.3, 1e-9, 1e5, 0, 0, 0, 1e5, 1e5, 1e5, 20)
+    },
+    {
+        "name": "Offshore Oil Pipeline",
+        "params": (500.0, 0.5, 0.05, 200e9, 0.3, 10e6, 20e6, 1e6, 1e6, 1e6, 1e7, 1e7, 1e7, 5)
+    },
+    {
+        "name": "Wind Turbine Blade Root",
+        "params": (2.0, 0.5, 0.1, 70e9, 0.33, 1e5, 1e5, 1e5, 1e5, 1e5, 1e7, 1e7, 1e7, 30)
+    },
+    {
+        "name": "Aircraft Engine Nacelle",
+        "params": (1.5, 1.0, 0.02, 70e9, 0.33, 1e5, 8e4, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, 100)
+    },
+    {
+        "name": "Hydroelectric Dam Penstock",
+        "params": (5.0, 2.0, 0.1, 200e9, 0.3, 2e6, 1e5, 0, 0, -9.81e5, 1e6, 1e6, 1e6, 15)
+    },
+    {
+        "name": "Cryogenic Storage Tank",
+        "params": (3.0, 1.5, 0.05, 200e9, 0.3, 5e5, 1e5, 0, 0, -9.81e4, 1e5, 1e5, 1e5, -200)
+    },
+    {
+        "name": "Roller Coaster Loop",
+        "params": (10.0, 1.0, 0.05, 200e9, 0.3, 1e5, 1e5, 1e5, 1e5, 1e5, 1e6, 1e6, 1e6, 25)
+    },
+    {
+        "name": "Satellite Fuel Tank",
+        "params": (0.5, 0.25, 0.005, 70e9, 0.33, 2e6, 0, 100, 100, 100, 1e3, 1e3, 1e3, 50)
+    },
+    {
+        "name": "Superconducting Magnet Coil",
+        "params": (1.0, 0.2, 0.02, 100e9, 0.3, 1e5, 1e5, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, -270)
+    },
+    {
+        "name": "Bicycle Tire",
+        "params": (0.3, 0.025, 0.003, 0.01e9, 0.45, 8e5, 1e5, 500, 0, 500, 10, 10, 10, 25)
+    },
+    {
+        "name": "Industrial Centrifuge",
+        "params": (0.5, 0.2, 0.01, 200e9, 0.3, 1e5, 1e5, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, 50)
+    },
+    {
+        "name": "Spacecraft Heat Shield",
+        "params": (2.0, 1.0, 0.1, 50e9, 0.3, 1e5, 0, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, 1500)
+    },
+    {
+        "name": "Underwater Habitat",
+        "params": (5.0, 2.0, 0.1, 200e9, 0.3, 1e5, 3e6, 1e5, 1e5, 1e5, 1e6, 1e6, 1e6, 10)
+    },
+    {
+        "name": "MRI Machine Bore",
+        "params": (1.0, 0.5, 0.05, 200e9, 0.3, 1e5, 1e5, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, 20)
+    },
+    {
+        "name": "Hypersonic Aircraft Fuselage",
+        "params": (20.0, 2.0, 0.1, 200e9, 0.3, 1e5, 5e4, 1e5, 1e5, 1e5, 1e6, 1e6, 1e6, 800)
+    },
+    {
+        "name": "Geothermal Well Casing",
+        "params": (1.0, 0.1, 0.02, 200e9, 0.3, 20e6, 50e6, 1e5, 1e5, 1e5, 1e6, 1e6, 1e6, 300)
+    },
+    {
+        "name": "Vacuum Chamber",
+        "params": (2.0, 1.0, 0.05, 200e9, 0.3, 0, 1e5, 1e4, 1e4, 1e4, 1e5, 1e5, 1e5, 25)
+    },
+    {
+        "name": "Inflatable Space Habitat",
+        "params": (5.0, 2.5, 0.001, 0.5e9, 0.45, 1e5, 0, 100, 100, 100, 1e3, 1e3, 1e3, 25)
+    },
+    {
+        "name": "Hyperloop Tube Section",
+        "params": (5.0, 1.5, 0.05, 200e9, 0.3, 1e3, 1e5, 1e5, 1e5, 1e5, 1e6, 1e6, 1e6, 30)
     }
 ]
 
@@ -118,12 +198,33 @@ def run_analysis(calculate_torus_stresses, fatigue_analysis, advanced_calculatio
     choice = int(input("Enter the number of the example you want to visualize: ")) - 1
     
     if 0 <= choice < len(examples):
-        create_example_visualization(examples[choice])
+        chosen_example = examples[choice]
+        R, r, t, E, nu, p_int, p_ext, F_x, F_y, F_z, M_x, M_y, M_z, T = chosen_example['params']
+        
+        # Add default values for missing parameters
+        N_cycles = 1e6
+        S_ut = 500e6
+        yield_stress = 250e6
+        n = 1.5
+        T_inner = T
+        T_outer = T
+        rho = 7800
+        omega = 0
+        K_IC = 50e6
+
+        variables = [
+            ('R', R), ('r', r), ('t', t), ('E', E), ('nu', nu),
+            ('p_int', p_int), ('p_ext', p_ext), ('F_x', F_x), ('F_y', F_y), ('F_z', F_z),
+            ('M_x', M_x), ('M_y', M_y), ('M_z', M_z), ('T', T), ('N_cycles', N_cycles),
+            ('S_ut', S_ut), ('yield_stress', yield_stress), ('n', n),
+            ('T_inner', T_inner), ('T_outer', T_outer), ('rho', rho), ('omega', omega), ('K_IC', K_IC)
+        ]
+
+        create_advanced_animation(variables, yield_stress, calculate_torus_stresses, fatigue_analysis)
     else:
         print("Invalid example index")
     
     input("\nPress Enter to return to the main menu...")
-
 if __name__ == "__main__":
     # This allows the module to be run standalone for testing
     run_analysis(None, None, None, None)

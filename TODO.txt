@@ -1,10 +1,8 @@
 DONE :: Add more advanced material models, such as viscoelasticity or plasticity, to capture complex material behavior under various loading conditions.
 
-Implement a full 3D finite element analysis module for more accurate stress and strain predictions, including mesh generation and solver algorithms.
+DONE :: Implement a full 3D finite element analysis module for more accurate stress and strain predictions, including mesh generation and solver algorithms.
 
 Develop a module for composite material analysis, allowing for layered structures and anisotropic material properties.
-
-Create a graphical user interface (GUI) for easier interaction with the analyzer, including real-time parameter adjustments and result visualization.
 
 Incorporate fluid-structure interaction analysis to study the effects of internal or external fluid flow on the torus structure.
 
