@@ -1,0 +1,31 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Git push script
+push.py
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Output files
+*.out
+*.csv
+*.xlsx
+
+# Temporary files
+*.tmp
+*.bak
